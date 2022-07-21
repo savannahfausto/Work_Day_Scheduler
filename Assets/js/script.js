@@ -61,16 +61,11 @@ $(document).ready(function(){
         var scheduleHourContainer = $('<div>')
             .addClass('col-1 hour')
             .text(scheduleHours[i])
-            .attr({
-                id: 'hour-' + (i + 9)
-            })
     
         //adds a textarea to add task, adds classes for styling, adds id
         var textArea = $('<textarea>')
             .addClass('col-10 description')
-            .attr({
-                id: 'text-area-' + (i + 9)
-            })
+        
     
         //calls on function to verify what color each textArea should be
         hourColor(textArea);
@@ -97,23 +92,31 @@ $(document).ready(function(){
     
     
     function saveTask() {
-        //this is whatever you click on the page -- the button
-        //read on siblings -- 
+        //this is whatever you click on the page -- the save button, take its sibling with class .description and get its value
         var value = $(this).siblings('.description').val();
-        console.log("value", value);
+        //take parent of button clicked and get id 
         var time = $(this).parent().attr('id');
-        console.log("time", time);
 
+        //saves the value and time in local storage
         localStorage.setItem(time, value);
-        //need to show notification that item was saved to local storage by adding class called notification $('.notification).method/event to act upon the selector
-        //create a timeout to remove notification after 5 seconds it goes away. setTimeout(), has a callback to do what you want. remove class that you just created 
-    
+        
+        //creates a div with text and a class of notification
+        var saveMessage = $('<div>').addClass('notification').text('Appointment Added ✅');
+        //adds the created div to the top of the container
+        $('.container').prepend(saveMessage);
+        
+        //removes saveMessage after 5 seconds
+        setTimeout (function() {
+            $('.notification').remove();
+        }
+            , 5000);
     }
 
 
-    
+   //listener for save button, invokes call back function 
     $('.saveBtn').on('click', saveTask);
 //load any saved data from local storage 
-    $('#row-9 .description').val(localStorage.getItem('row-9'))
-
+    for (var i = 0; i < 15; i++) {
+        $('#row-' + (i+9) + ' .description').val(localStorage.getItem('row-' + (i+9)))
+    }
 })
