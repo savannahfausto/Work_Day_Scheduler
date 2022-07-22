@@ -13,4 +13,4 @@ Here is a link of the different colored rows and a "saved message" that displays
 ![Screenshot of deployed schedule of Work Day Scheduler](./Assets/images/saved.png)
 
 ## Link to Password Generator Website: 
-[Work Day Scheduler Website](url)
+[Work Day Scheduler Website](https://savannahfausto.github.io/Work_Day_Scheduler/)
